@@ -75,9 +75,15 @@ int use_notification_permission() {
 void notifications_ask() { notifications_request(); }
 
 // Show a notification `seconds` from now (at least 1), with `id` to cancel or replace it: one
-// scheduled with the same id replaces it. Without the permission the system drops it.
-void notification_schedule(string id, string title, string body, int seconds) {
-    notifications_native_schedule(id, title, body == null ? "" : body, seconds < 1 ? 1 : seconds);
+// scheduled with the same id replaces it. False, and nothing is scheduled, when the platform
+// cannot show notifications (notifications_supported is false: a browser without the
+// Notification API, Linux without a session bus) or the user denied them (as
+// use_notification_permission last said); true when it was handed to the platform. With the
+// permission not asked yet, the system may still drop it.
+bool notification_schedule(string id, string title, string body, int seconds) {
+    if (id == null || !notifications_supported() || notifications_permission == NotificationsDenied) { return false; }
+    notifications_native_schedule(id, title == null ? "" : title, body == null ? "" : body, seconds < 1 ? 1 : seconds);
+    return true;
 }
 
 // Cancel a scheduled notification, and take it away if it is showing.

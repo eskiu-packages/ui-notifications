@@ -67,11 +67,15 @@ the user chose). The answer reaches use_notification_permission.
 ### notification_schedule
 
 ```eskiu
-void notification_schedule(string id, string title, string body, int seconds)
+bool notification_schedule(string id, string title, string body, int seconds)
 ```
 
 Show a notification `seconds` from now (at least 1), with `id` to cancel or replace it: one
-scheduled with the same id replaces it. Without the permission the system drops it.
+scheduled with the same id replaces it. False, and nothing is scheduled, when the platform
+cannot show notifications (notifications_supported is false: a browser without the
+Notification API, Linux without a session bus) or the user denied them (as
+use_notification_permission last said); true when it was handed to the platform. With the
+permission not asked yet, the system may still drop it.
 
 ### notification_cancel
 

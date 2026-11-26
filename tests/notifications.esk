@@ -92,12 +92,22 @@ int main() {
     ui_frame();
     check(String_eq_cstr(&shown, "allowed") == 1, "allowed renders");
 
-    notification_schedule("tea", "Tea is ready", "Four minutes are up", 0);
+    check(notification_schedule("tea", "Tea is ready", "Four minutes are up", 0), "scheduled");
     check(String_eq_cstr(&scheduled, "tea|Tea is ready|Four minutes are up|1") == 1, "a schedule, at least a second away");
     notification_schedule("x", "Title", null, 30);
     check(String_eq_cstr(&scheduled, "x|Title||30") == 1, "no body is an empty one");
     notification_cancel("tea");
     check(String_eq_cstr(&cancelled, "tea") == 1, "cancel");
+    supported_answer = 0;
+    check(!notification_schedule("y", "Title", "Body", 5), "refused where the platform has no notifications");
+    check(String_eq_cstr(&scheduled, "x|Title||30") == 1, "nothing scheduled there");
+    supported_answer = 1;
+    ui_event_native("notifications", "permission denied");
+    ui_frame();
+    check(!notification_schedule("y", "Title", "Body", 5), "refused when denied");
+    check(String_eq_cstr(&scheduled, "x|Title||30") == 1, "nothing scheduled when denied");
+    ui_event_native("notifications", "permission allowed");
+    ui_frame();
 
     // Opened while running: the handler gets it, and it is not handed out again later.
     String_from(&pending, "tap");
