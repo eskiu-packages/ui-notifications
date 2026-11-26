@@ -77,9 +77,21 @@ void Tea() {
 | `notifications_supported()` | Whether the platform can show notifications (iOS, Android, macOS, Windows, a browser with the Notification API, Linux with a session bus), before asking. It does not ask. |
 | `use_notification_permission()` | Whether the app may show notifications, while the scope is mounted: `NotificationsChecking` until the platform answers, then `NotificationsNotAsked`, `NotificationsAllowed` or `NotificationsDenied`. The scope renders again when it changes. |
 | `notifications_ask()` | Ask the user. The system asks once; after that it answers with what the user chose (change it in the system's settings). |
-| `notification_schedule(id, title, body, seconds)` | Show a notification `seconds` from now (at least 1). One scheduled with the same `id` replaces it. |
+| `notification_schedule(id, title, body, seconds)` | Show a notification `seconds` from now (at least 1). One scheduled with the same `id` replaces it. False, and nothing scheduled, where `notifications_supported()` is false or the user denied them. |
 | `notification_cancel(id)` | Cancel a scheduled notification, and take it away if it is showing. |
 | `use_notification_opened(fn(string id))` | The id of each notification the user opens while the scope is mounted, and, when it mounts, the one that opened the app. |
+
+## Status
+
+ui-notifications is in Preview, as ui's device packages are (ui's
+[docs/stability.md](https://github.com/eskiu-packages/ui/blob/main/docs/stability.md)): `eskiuc
+test` checks it against stand-ins for the platform, not on devices, and its API may still change
+in a minor release.
+
+It works on iOS, Android, macOS, Windows (a balloon), Linux with a notification server, and
+in a browser with the Notification API (only while the page is open; a `--webview` build is
+the same). Where `notifications_supported()` is false, or the user denied notifications,
+`notification_schedule` returns false and schedules nothing, so an app can tell the user.
 
 ## Documentation
 

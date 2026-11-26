@@ -3,6 +3,16 @@
 All notable changes to this package are documented in this file. The format is based on
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [Unreleased]
+
+### Changed
+
+- `notification_schedule` returns a bool: false, and nothing is scheduled, where
+  `notifications_supported()` is false or the user denied notifications. Code that ignores the
+  result builds as before.
+- The README says which platforms show notifications and that the package is in Preview,
+  tested against stand-ins.
+
 ## [0.1.6] - 2026-11-21
 
 ### Added
