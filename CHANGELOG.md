@@ -3,7 +3,11 @@
 All notable changes to this package are documented in this file. The format is based on
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
-## [Unreleased]
+## [0.1.7] - 2026-11-26
+
+### Changed
+
+- Depends on ui 0.8.0.
 
 ### Changed
 
@@ -13,7 +17,7 @@ All notable changes to this package are documented in this file. The format is b
 - The README says which platforms show notifications and that the package is in Preview,
   tested against stand-ins.
 
-## [0.1.6] - 2026-11-21
+## [0.1.6]
 
 ### Added
 

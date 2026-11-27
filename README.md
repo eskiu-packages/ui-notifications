@@ -14,7 +14,7 @@
 
 <p align="center">
   <a href="https://github.com/eskiu-packages/ui-notifications/actions/workflows/ci.yml"><img src="https://github.com/eskiu-packages/ui-notifications/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/version-0.1.6-6448d4" alt="Version 0.1.6">
+  <img src="https://img.shields.io/badge/version-0.1.7-6448d4" alt="Version 0.1.7">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="License: MIT"></a>
 </p>
 
@@ -45,7 +45,7 @@ among them.
 In an app made with `ui new`:
 
 ```bash
-eskiuc add notifications --git https://github.com/eskiu-packages/ui-notifications --rev v0.1.6
+eskiuc add notifications --git https://github.com/eskiu-packages/ui-notifications --rev v0.1.7
 ```
 
 Its `ui.toml` brings the UserNotifications framework on iOS and macOS, and on Android the
